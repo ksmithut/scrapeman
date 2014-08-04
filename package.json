@@ -1,0 +1,29 @@
+{
+  "name": "scrapeman",
+  "version": "0.0.0",
+  "description": "A node module to help build custom web scrapers",
+  "main": "lib/scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ksmithut/scrapeman.git"
+  },
+  "keywords": [
+    "scraper",
+    "web"
+  ],
+  "author": "ksmithut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ksmithut/scrapeman/issues"
+  },
+  "homepage": "https://github.com/ksmithut/scrapeman",
+  "dependencies": {
+    "bluebird": "^2.2.2",
+    "cheerio": "^0.17.0",
+    "lodash.defaults": "^2.4.1",
+    "request": "^2.39.0"
+  }
+}
