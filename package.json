@@ -4,7 +4,9 @@
   "description": "A node module to help build custom web scrapers",
   "main": "lib/scraper.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha",
+    "codeclimate": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -25,5 +27,13 @@
     "cheerio": "^0.17.0",
     "lodash.defaults": "^2.4.1",
     "request": "^2.39.0"
+  },
+  "devDependencies": {
+    "codeclimate-test-reporter": "0.0.3",
+    "expect.js": "^0.3.1",
+    "express": "^4.7.4",
+    "istanbul": "^0.3.0",
+    "mocha": "^1.21.3",
+    "mocha-lcov-reporter": "0.0.1"
   }
 }
