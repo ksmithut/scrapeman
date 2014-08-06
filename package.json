@@ -32,6 +32,7 @@
     "codeclimate-test-reporter": "0.0.3",
     "expect.js": "^0.3.1",
     "express": "^4.7.4",
+    "glob": "^4.0.5",
     "istanbul": "^0.3.0",
     "mocha": "^1.21.3",
     "mocha-lcov-reporter": "0.0.1"
