@@ -8,11 +8,14 @@ var glob    = Promise.promisify(require('glob'));
 var expect  = require('expect.js');
 var Scraper = require('../lib/scraper');
 var server  = require('./fixtures/server');
-var baseUrl = 'http://localhost:8000';
+var port    = 8000;
+var baseUrl = 'http://localhost:' + port;
 
 describe('Scrapeman tests', function () {
 
-  before(function (done) { server(done); });
+  before(function (done) {
+    server.listen(port, done);
+  });
 
   describe('Level 1', function () {
     it('should go through all of the pages', defaultOptions);
@@ -32,6 +35,7 @@ describe('Scrapeman tests', function () {
         return fs.unlinkAsync(path.join(__dirname, file));
       }));
     }).then(function () {
+      server.close();
       done();
     });
   });
