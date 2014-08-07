@@ -70,6 +70,8 @@ function defaultOptions(done) {
       baseUrl + '/blog.html',
       baseUrl + '/portfolio.html',
       baseUrl + '/contact.html',
+      baseUrl + '/relative-test/',
+      baseUrl + '/relative-test/should-not-be-root.html',
       'http://google.com'
     ]);
     done();
