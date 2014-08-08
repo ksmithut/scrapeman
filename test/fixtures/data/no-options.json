@@ -1,0 +1,12 @@
+{
+  "resources": {
+    "": {
+      "from": [
+        ""
+      ],
+      "url": "",
+      "error": "options.uri is a required argument"
+    }
+  },
+  "data": {}
+}

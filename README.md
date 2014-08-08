@@ -25,17 +25,9 @@ all of the data.
 ```javascript
 var Scraper = require('scrapeman');
 
-var scraper = new Scraper('http://yoursite.com');
+var scraper = new Scraper({baseUrl: 'http://yoursite.com'});
 
-// plugin to get the status of each page
-scraper.plugin(Scraper.plugins.status);
-// plugin to parse the contents of html pages and attaches a cheerio object
-// so you can do stuff like $('a').each();
-scraper.plugin(Scraper.plugins.parse);
-// plugin to get the hrefs from <a/> and add them to the scraping queue
-scraper.plugin(Scraper.plugins.hrefs);
-// plugin to get the src of <img/> and add them to the scraping queue
-scraper.plugin(Scraper.plugins.src);
+scraper.plugin(Scraper.plugins.core);
 
 scraper.start();
 
@@ -63,12 +55,6 @@ make requests at the given interval. Default: `5`
 * `options.interval` The interval (in milliseconds) by which the scraper will
 make requests. Default: `500`
 
-* `options.pause` The absolute filepath to the file that saves when the scraper
-is paused. Default: `process.cwd() + '/scrapeman-pause.json'`
-
-* `options.final` The absolute filepath to the file that saves when the scraper
-has finished. Default: `process.cwd() + '/scrapeman-final.json'`
-
 ---
 
 `scraper.fullUrl(url)`
@@ -94,8 +80,8 @@ Adds a url to scrape to the queue.
 
 `scraper.plugin(plugin)`
 
-Adds a plugin to the plugin chain. There are several plugins built it to help
-you get started.
+Adds a plugin to the plugin chain. You can also pass an array of plugins to add.
+There are several plugins built it to help you get started.
 
 * `Scraper.plugins.status` Attaches the status code to the page data.
 * `Scraper.plugins.parse` Parses html resources and attaches a $ object to the
@@ -105,6 +91,9 @@ would with jQuery
 adds the url from the `href` attribute to the scraper queue
 * `Scraper.plugins.src` Uses the $ object to find all of the `<img/>` tags and
 adds the url from the `src` attribute to the scraper queue
+
+If you want to use all of those (in that order), you can use
+`scraper.plugin(Scraper.plugins.core)`.
 
 You can add your own plugin! A plugin is just a function that accepts 4
 arguments: `curPage` (the current page that just got scraped), `res` (the http
@@ -147,36 +136,55 @@ titles and alt text? You can do that do. Want it to only scrape through a series
 of pages? Just modify the above code to only add the links that point to the
 next page.
 
+To check for plugin errors, listen on the pluginError event:
+
+```javascript
+scraper.on('pluginError', function (err) {
+  console.error(err);
+});
+```
+
+Errors will not break the scraper, it will just ignore anything that happens in
+it after the error is thrown.
 ---
 
 `scraper.start()`
 
-Starts (or restarts) the scraper. This method returns a promise, so if you want
-to track when it actually starts, just use the following code:
-
-```javascript
-scraper.start().then(function () {
-  console.log('scraper started');
-});
-```
+Starts (or restarts) the scraper. Don't worry about accidentally starting it
+twice, if you do, it will just ignore any subsequent calls.
 
 ---
 
 `scraper.pause()`
 
-Pauses the scraper and saves to a pause file to save the state of the scraping.
-This is useful when the scraper takes a long time to scrape the site but you
-need to stop the process. The way that I've set this up in the past is below:
+Pauses the scraper and gives you pause data that you can save to a file or whatever. Historically,
+this plugin saved the file for you, but doing that made assumptions about your workflow.
+If you would like to save stuff to a file and restart based on the saved file, you could
+do something like this:
 
 ```javascript
+// ... initialize your scraper stuff here
+var fs   = require('fs');
+var path = require('path');
+var saveFile = path.join(process.cwd(), 'scrapeman-pause.json');
+
+fs.exists(saveFile, function (exists) {
+  var saveData;
+  if (exists) { saveData = require(saveFile); }
+  scraper.start(saveData);
+});
+
 process.on('SIGINT', function () {
-  console.log('writing pause file');
-  scraper.pause().then(function () {
+  var saveData = scraper.pause();
+  var stringContents = JSON.stringify(saveData, null, 2);
+  fs.writeFile(saveFile, stringContents, function (err) {
+    if (err) { return console.error(err); }
     console.log('scraper paused');
-    process.exit();
   });
 });
 ```
+I may be convinced to write in some file saver api, but I'd like to keep that
+part out of this module.
 
 ---
 
