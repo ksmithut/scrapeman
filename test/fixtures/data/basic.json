@@ -1,12 +1,5 @@
 {
   "resources": {
-    "http://localhost:4000": {
-      "from": [
-        null
-      ],
-      "url": "http://localhost:4000",
-      "statusCode": 200
-    },
     "http://localhost:4000/": {
       "from": [
         "http://localhost:4000/",
@@ -21,7 +14,6 @@
     "http://localhost:4000/blog/": {
       "from": [
         "http://localhost:4000/",
-        "http://localhost:4000/",
         "http://localhost:4000/blog/",
         "http://localhost:4000/blog/post1.html",
         "http://localhost:4000/blog/post2.html"
@@ -31,7 +23,6 @@
     },
     "http://lorempixel.com/400/200/technics/": {
       "from": [
-        "http://localhost:4000/",
         "http://localhost:4000/"
       ],
       "url": "http://lorempixel.com/400/200/technics/",
@@ -50,6 +41,13 @@
       ],
       "url": "http://localhost:4000/blog/post2.html",
       "statusCode": 200
+    },
+    "http://ewsdoiweakfdskawesd.org/": {
+      "from": [
+        "http://localhost:4000/blog/"
+      ],
+      "url": "http://ewsdoiweakfdskawesd.org/",
+      "error": "getaddrinfo ENOTFOUND"
     },
     "http://www.google.com/dsfewasd": {
       "from": [

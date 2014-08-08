@@ -1,20 +1,15 @@
 'use strict';
 
 var expect = require('expect.js');
-var scrape = require('../../lib/scraper');
+var Scraper = require('../../lib/scraper');
 var config = require('../fixtures/config');
 
 module.exports = function (done) {
 
-  var scraper = scrape({
-    baseUrl: config.host,
-    interval: 10,
-    maxPending: 1
-  });
+  var scraper = new Scraper();
 
-  scraper.plugin(scrape.plugins.core);
+  scraper.plugin(Scraper.plugins.core);
 
-  scraper.start();
   scraper.start();
 
   scraper.on('bug', handleError);
@@ -26,8 +21,9 @@ module.exports = function (done) {
   }
 
   scraper.on('end', function (data) {
-    expect(data).to.eql(require('../fixtures/data/basic'));
+    expect(data).to.eql(require('../fixtures/data/no-options'));
     done();
   });
 
 };
+
