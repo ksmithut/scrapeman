@@ -192,12 +192,5 @@ I know that's a lot to take in, but let me know if I can help make anything more
 clear by opening an issue.
 
 Also, it's not perfect. There are a lot of errors to try and account for. If you
-are running into issues, open an issue and paste in the output from:
-
-```javascript
-scraper.on('bug', function (err) {
-  console.log(err);
-});
-```
-
-as well as any relavent code that you are using.
+are running into issues, open an issue and I'll get to it as soon as possible,
+usually within a day.

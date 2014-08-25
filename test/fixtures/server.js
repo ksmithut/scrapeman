@@ -8,6 +8,12 @@ var server  = http.createServer(app);
 var pubPath = path.join(__dirname, 'site');
 
 app.use(function (req, res, next) {
+  if (req.url === '/redirect') {
+    return res.redirect('/blog/post1.html');
+  }
+  next();
+});
+app.use(function (req, res, next) {
   setTimeout(next, 100);
 });
 app.use(express.static(pubPath));
