@@ -43,7 +43,6 @@ module.exports = function (done) {
     expect(variableResource.from).to.contain(host + '/redirect');
     expect(variableResource.url).to.eql(host + '/blog/post1.html');
     expect(variableResource.statusCode).to.eql(200);
-    console.log(variableResource);
     done();
   });
 
