@@ -33,7 +33,17 @@ module.exports = function (done) {
   }
 
   scraper.on('end', function (data) {
-    expect(data).to.eql(require('../fixtures/data/basic'));
+    var host = 'http://localhost:' + config.port;
+    var url = host + '/blog/post1.html';
+    var variableResource = data.resources[url];
+    delete data.resources[url];
+    expect(data).to.eql(require('../fixtures/data/plugin-error'));
+    expect(variableResource).to.only.have.keys(['from', 'url', 'statusCode']);
+    expect(variableResource.from).to.contain(host + '/blog/');
+    expect(variableResource.from).to.contain(host + '/redirect');
+    expect(variableResource.url).to.eql(host + '/blog/post1.html');
+    expect(variableResource.statusCode).to.eql(200);
+    console.log(variableResource);
     done();
   });
 

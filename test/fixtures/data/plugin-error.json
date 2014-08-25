@@ -31,14 +31,6 @@
       "url": "http://localhost:4000/redirect",
       "redirectTo": "http://localhost:4000/blog/post1.html"
     },
-    "http://localhost:4000/blog/post1.html": {
-      "from": [
-        "http://localhost:4000/redirect",
-        "http://localhost:4000/blog/"
-      ],
-      "url": "http://localhost:4000/blog/post1.html",
-      "statusCode": 200
-    },
     "http://lorempixel.com/400/200/technics/": {
       "from": [
         "http://localhost:4000/"
