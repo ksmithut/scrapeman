@@ -1,6 +1,6 @@
 {
   "name": "scrapeman",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A node module to help build custom web scrapers",
   "main": "lib/scraper.js",
   "scripts": {
