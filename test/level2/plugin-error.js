@@ -37,7 +37,18 @@ module.exports = function (done) {
     var url = host + '/blog/post1.html';
     var variableResource = data.resources[url];
     delete data.resources[url];
-    expect(data).to.eql(require('../fixtures/data/plugin-error'));
+
+    try {
+      expect(data).to.eql(require('../fixtures/data/plugin-error'));
+    } catch (err) {
+      try {
+        expect(data).to.eql(require('../fixtures/data/new-plugin-error'));
+      } catch (err) {
+        expect(data).to.eql(require('../fixtures/data/new2-plugin-error'));
+      }
+    }
+
+
     expect(variableResource).to.only.have.keys(['from', 'url', 'statusCode']);
     expect(variableResource.from).to.contain(host + '/blog/');
     expect(variableResource.from).to.contain(host + '/redirect');

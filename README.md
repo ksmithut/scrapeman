@@ -1,7 +1,10 @@
 # scrapeman
 
+[![io.js compatibility](https://img.shields.io/badge/io.js-compatible-brightgreen.svg?style=flat)](https://iojs.org/)
 [![NPM version](http://img.shields.io/npm/v/scrapeman.svg?style=flat)](https://www.npmjs.org/package/scrapeman)
-[![Dependency Status](http://img.shields.io/gemnasium/ksmithut/scrapeman.svg?style=flat)](https://gemnasium.com/ksmithut/scrapeman)
+
+[![Dependency Status](http://img.shields.io/david/ksmithut/scrapeman.svg?style=flat)](https://gemnasium.com/ksmithut/scrapeman)
+[![Dev Dependency Status](http://img.shields.io/david/dev/ksmithut/scrapeman.svg?style=flat)](https://gemnasium.com/ksmithut/scrapeman)
 [![Code Climate](http://img.shields.io/codeclimate/github/ksmithut/scrapeman.svg?style=flat)](https://codeclimate.com/github/ksmithut/scrapeman)
 [![Build Status](http://img.shields.io/travis/ksmithut/scrapeman.svg?style=flat)](https://travis-ci.org/ksmithut/scrapeman)
 [![Coverage Status](http://img.shields.io/codeclimate/coverage/github/ksmithut/scrapeman.svg?style=flat)](https://codeclimate.com/github/ksmithut/scrapeman)
